@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Popup container */
+        #yesyes {
+            display: none;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #555;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* Popup text */
+        #yesyes h1 {
+            color: red;
+        }
+
+        #yesyes p {
+            margin-top: 20px;
+        }
+
+        #yesyes img {
+            width: 100px;
+            height: 100px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="valen" align="center">
+        <img id="gif" src="valentine.gif" alt="cutegirl">
+        <br>
+        <h1 style="color: red;">Will You Be My Valentine?</h1>
+        <br>
+        <button  id="yesbutton" style="color: red;" onclick="yes()">Yes! I'll be your valentine.</button>
+        <button id="nobutton" style="color: red;" onclick="no()">No Way! I don't want to be your
+            <audio id="sad" loop src="sad.mp3"></audio>
+            <audio id="happy" loop src="happy.mp3"></audio>
+    </div>
+
+    <div id="yesyes" onclick="yes()">
+        <h1>I'm so happy you said yes!</h1>
+        <img src="happy.gif" alt="happy">
+        <p>Let's go out for a nice dinner and watch a romantic movie</p>
+    </div>
+</body>
+</html>
+
+<script>
+    var audio = document.getElementById('sad');
+    var audio2 = document.getElementById('happy');
+
+    function no() {
+        var noButton = document.getElementById('nobutton');
+        var yesButton = document.getElementById('yesbutton');
+        
+        var currentNoButtonSize = parseFloat(window.getComputedStyle(noButton).fontSize);
+        var currentYesButtonSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+        noButton.style.fontSize = (currentNoButtonSize * 0.9) + 'px'; // Decrease size by 10%
+        yesButton.style.fontSize = (currentYesButtonSize * 1.1) + 'px'; // Increase size by 10%
+        
+        document.getElementById('gif').src = 'sad.gif';
+        document.body.style.backgroundColor = 'white';
+        
+        // Stop happy audio and play sad audio
+        audio2.pause();
+        audio.play();
+    }
+
+    function yes() {
+        var valenDiv = document.getElementById("valen");
+        var yesyesDiv = document.getElementById("yesyes");
+        
+        valenDiv.style.display = "none";
+        yesyesDiv.style.display = "block";
+        
+        // Stop sad audio and play happy audio
+        audio.pause();
+        audio2.play();
+    }
+</script>
